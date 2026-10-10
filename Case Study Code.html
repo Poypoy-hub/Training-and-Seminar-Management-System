@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Barangay Pinagbuhatan Training and Seminar Management System</title>
+    <style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f4f7;
+  color: #202b3c;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 205px;
+  background: #102b4e;
+  color: white;
+  padding: 20px 14px;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5;
+  padding: 5px 8px 22px;
+  border-bottom: 1px solid #ffffff30;
+}
+
+.logo span {
+  display: block;
+  font-size: 10px;
+  color: #b9c9dd;
+  font-weight: normal;
+}
+
+.nav-title {
+  font-size: 10px;
+  color: #9fb2ca;
+  margin: 25px 8px 8px;
+  text-transform: uppercase;
+}
+
+.nav button {
+  display: block;
+  width: 100%;
+  padding: 12px 10px;
+  margin: 4px 0;
+  border: 0;
+  border-radius: 6px;
+  text-align: left;
+  color: #e3ebf6;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav button:hover,
+.nav button.active {
+  background: #1b416c;
+  color: white;
+}
+
+.main {
+  margin-left: 205px;
+}
+
+.topbar {
+  height: 65px;
+  background: white;
+  border-bottom: 1px solid #e0e5ec;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+}
+
+.topbar h2 {
+  font-size: 17px;
+}
+
+.admin {
+  font-size: 11px;
+  color: #526174;
+}
+
+.content {
+  padding: 25px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.card,
+.panel {
+  background: white;
+  border: 1px solid #e0e5ec;
+  border-radius: 9px;
+  padding: 17px;
+  margin-bottom: 18px;
+}
+
+.label {
+  font-size: 11px;
+  color: #687588;
+}
+
+.number {
+  font-size: 27px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 11px 9px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+th {
+  font-size: 9px;
+  color: #687588;
+  background: #f8fafc;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.field label {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.field input,
+.field select {
+  padding: 10px;
+  border: 1px solid #d5dce6;
+  border-radius: 5px;
+}
+
+button.primary {
+  background: #2f6fed;
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 13px;
+  cursor: pointer;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.status {
+  background: #fff1d3;
+  color: #96610b;
+  padding: 4px 7px;
+  border-radius: 12px;
+}
+
+@media (max-width: 760px) {
+  .sidebar {
+    position: static;
+    width: auto;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+    </style>
+</head>
+<body> 
+    <aside class="sidebar">
+        <div class="logo">
+            BARANGAY PINAGBUHATAN
+            <span> Training and Seminar Management System </span>
+        </div>
+        <div class="nav-title"Main Menu> </div>
+        <div class="nav">
+            <button class="active" onclick="showPage('dashboard', this)"> Dashboard</button>
+            <button class="active" onclick="showPage('dashboard', this)"> Training Programs</button>
+            <button class="active" onclick="showPage('dashboard', this)"> Participants</button>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <h2 id="pageTitle"> Dashboard Overview </h2>
+            <div class="admin">Administrator</div>
+        </header>
+
+        <div class="content">
+            <section class="page active" id="dashboard">
+                <h3> Dashboard </h3>
+                <p> Welcome to the training and seminar management system. </p>
+                <div class="cards">
+                    <div class="card"> 
+                        <div class="label"> Training Programs </div>
+                        <div class="number" id="participantTotal">0</div>
+                    </div>
+                
+                <div class="card">
+                    <div class="label"> Registered Participants </div>
+                    <div class="number" id="participantTotal">0</div>
+                </div>
+
+                <div class="card">
+                    <div class="label"> Upcoming Session </div>
+                    <div class="number" id="participantTotal">0</div>
+                    </div>
+                    </div>
+
+                <div class="panel">
+                    <h4> Upcoming Programs </h4>
+                    <table>
+                        <thead> 
+                            <tr>
+                                <th> Program Name </th>
+                                <th> Date </th>
+                                <th> Venue </th>
+                                <th> Status </th>
+                            </tr>
+                        </thead>
+                        <tbody id="upcomingRow"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="page" id="programs">
+                <h3> Training Program </h3>
+                <p> Add and view training or seminar schedules.</p>
+
+                <div class="panel">
+                    <h4> Add Training Program </h4>
+                    <form id="programForm">
+                        <div class="field">
+                            <label for="programDate">Date</label>
+                            <input id="programDate" type="date" required placeholder="Enter program name">
+                        </div>
+
+                        <div class="field">
+                            <label for="programDate"> Date </label>
+                            <input id="programDate" type="date" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="programVenue"> Venue </label>
+                            <input for="programVenue" required placeholder="Enter venue">
+                        </div>
+
+                        <button class="primary" type="submit"> Save Program </button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h4> Program List </h4>
+                    <table> 
+                        <thead>
+                            <tr>
+                                <th>Program Name </th>
+                                <th> Date </th>
+                                <th> Venue </th>
+                            </tr>
+                        </thead>
+                        <tbody id="programRows"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="page" id="programs">
+                <h3> Training Programs </h3> 
+                <p>  Add and view training or seminar schedule </p>
+
+                <div class="panel"> 
+                    <h4> Add Training Program </h4>
+
+                    <form> 
+                        <div class="field">
+                            <label for="programName"> Program Name </label>
+                            <input id="programName" required placeholder="Enter program name."> 
+                        </div>
+
+                        <div class="field">
+                            <label for="programDate"> Date </label>
+                            <input id="programDate" type="date" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="programVenue"> Venue </label>
+                            <input id="programVenue" required placeholder="Enter venue">
+                        </div>
+                        
+                        <button class="primary" type="sumbit"> Save Program </button>
+                        </form>
+                </div>
+
+                <div class="panel">
+                    <h4> Program List </h4>
+                    <tale>
+                        <thead>
+                            <tr>
+                                <th> Program List </th>
+                                <th> Date </th>
+                                <th> Venue </th>
+                            </tr>
+                        </thead>
+                        <tbody id="programRows"></tbody>
+                    </tale>
+                </div>
+            </section>
+            <section class="page" id="participants">
+      <h3>Participants</h3>
+      <p>Register a participant for a training program.</p>
+
+      <div class="panel">
+        <h4>Register Participant</h4>
+
+        <form id="participantForm">
+          <div class="field">
+            <label for="personName">Full Name</label>
+            <input id="personName" required
+              placeholder="Enter full name">
+          </div>
+
+          <div class="field">
+            <label for="personContact">Contact Number</label>
+            <input id="personContact" required
+              placeholder="09XXXXXXXXX">
+          </div>
+
+          <div class="field">
+            <label for="personProgram">Training Program</label>
+            <select id="personProgram" required></select>
+          </div>
+
+          <button class="primary" type="submit">
+            Register Participant
+          </button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h4>Participant List</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Contact Number</th>
+              <th>Training Program</th>
+            </tr>
+          </thead>
+          <tbody id="participantRows"></tbody>
+        </table>
+      </div>
+    </section>
+        </div>
+    </main>
+    
+</body>
+</html>
